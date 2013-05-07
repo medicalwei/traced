@@ -1,0 +1,20 @@
+doctype 5
+html
+  head
+    title [?] Trace log
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    noscript
+      p PLEASE ENABLE JAVASCRIPT TO BEGIN TESTING :3
+    h1#title Getting socket…
+    table#logs
+      thead
+        th Time
+        th IP
+        th User-Agent
+      tbody
+    script(type='text/javascript')
+      window.traced_id = "#{id}";
+    script(src='/javascripts/jquery.js', type='text/javascript')
+    script(src='/socket.io/socket.io.js', type='text/javascript')
+    script(src='/javascripts/traced.js', type='text/javascript')
