@@ -86,6 +86,7 @@ io.sockets.on('connection', function(socket){
   socket.emit('id');
   socket.on('set id', function (id){
     if (sockets[id] && sockets[id].stat == "ready"){
+      clearTimeout(socket.selfdestroy);
       socket.set('id', id, function(){
         sockets[id].socket = socket;
         sockets[id].stat = "running";
@@ -95,7 +96,7 @@ io.sockets.on('connection', function(socket){
   });
   socket.on('disconnect', function (){
     socket.get('id', function(err, id){
-      delete(sockets[id]);
+      destroy(id);
     });
   });
 });
