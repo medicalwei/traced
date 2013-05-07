@@ -7,7 +7,7 @@ $(function(){
   socket.on('trace', function(data){
     counter++;
     var r = $("<tr/>");
-    $("<td/>").text(new Date(data.time).toLocaleFormat()).appendTo(r);
+    $("<td/>").text(new Date(data.time).toLocaleString()).appendTo(r);
     $("<td/>").text(data.ip).appendTo(r);
     $("<td/>").text(data.ua).appendTo(r);
     $("#logs tbody").append(r);
