@@ -86,7 +86,7 @@ io.sockets.on('connection', function(socket){
   socket.emit('id');
   socket.on('set id', function (id){
     if (sockets[id] && sockets[id].stat == "ready"){
-      clearTimeout(socket.selfdestroy);
+      clearTimeout(sockets[id].selfdestroy);
       socket.set('id', id, function(){
         sockets[id].socket = socket;
         sockets[id].stat = "running";
