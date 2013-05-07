@@ -1,5 +1,5 @@
 $(function(){
-  var socket = io.connect('http://localhost');
+  var socket = io.connect();
   var counter = 0;
   socket.on('id', function () {
     socket.emit('set id', window.traced_id);
