@@ -8,8 +8,12 @@ $(function(){
     counter++;
     var r = $("<tr/>");
     $("<td/>").text(new Date(data.time).toLocaleString()).appendTo(r);
-    $("<td/>").text(data.ip).appendTo(r);
-    $("<td/>").text(data.ua).appendTo(r);
+    if (data.dnt) {
+      $("<td/>").attr("colspan", "2").text("Do Not Track is on").appendTo(r);
+    } else {
+      $("<td/>").text(data.ip).appendTo(r);
+      $("<td/>").text(data.ua).appendTo(r);
+    }
     $("#logs tbody").append(r);
     $("#title").text(counter + " access(es) to this url.");
     $("title").text("[" + counter + "] Trace log");

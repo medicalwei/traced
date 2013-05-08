@@ -82,11 +82,18 @@ app.post('/', genID);
 app.get('/:id', function(req, res){
   var id = req.params.id;
   if (sockets[id]){
-    var userinfo = {
-      time: new Date(),
-      ip: req.ip,
-      ua: req.get('User-Agent')
-    };
+    if (req.get('DNT') == 1){
+      var userinfo = {
+        time: new Date(),
+        dnt: 1
+      };
+    } else {
+      var userinfo = {
+        time: new Date(),
+        ip: req.ip,
+        ua: req.get('User-Agent')
+      };
+    }
     if(sockets[id].stat == "ready"){
       // first person open this page: start the log
       sockets[id].user = userinfo;
