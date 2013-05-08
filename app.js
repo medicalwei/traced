@@ -18,7 +18,27 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.favicon());
-app.use(express.logger('dev'));
+
+if ('development' == app.get('env')) {
+  app.use(express.logger('dev'));
+}
+
+if ('production' == app.get('env')) {
+  app.use(express.compress());
+  io.enable('browser client minification');
+  io.enable('browser client etag');
+  io.enable('browser client gzip');
+  io.set('log level', 1);
+
+  io.set('transports', [
+      'websocket'
+    , 'flashsocket'
+    , 'htmlfile'
+    , 'xhr-polling'
+    , 'jsonp-polling'
+  ]);
+}
+
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
